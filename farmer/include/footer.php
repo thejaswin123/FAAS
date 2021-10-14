@@ -102,22 +102,16 @@
         </div>
       </div>
     </div>
-    <!--   Core JS Files   -->
+
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/custom.js?v=<?php echo rand(10,1000);?>"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    <!--  Google Maps Plugin    -->
-    <!-- Chart JS -->
-    <!-- <script src="../assets/js/plugins/chartjs.min.js"></script> -->
-    <!--  Notifications Plugin    -->
-    <!-- <script src="../assets/js/plugins/bootstrap-notify.js"></script> -->
-    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  
     <script src="../assets/js/paper-dashboard.min.js?v=<?php echo rand(10,1000);?>" type="text/javascript"></script>
-    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-    <!-- <script src="../assets/demo/demo.js"></script> -->
+  
     <script type="text/javascript">
       $(document).ready(function() {
         $(document).ready(function() {

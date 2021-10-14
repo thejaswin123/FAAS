@@ -44,7 +44,6 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="index.php?page=profile"><i class="nc-icon nc-circle-10"></i> Profile</a>
-              <!-- <a class="dropdown-item" href="index.php?page=password"><i class="nc-icon nc-key-25"></i> Password</a> -->
               <a class="dropdown-item" href="logout.php"><i class="nc-icon nc-button-power"></i> Logout</a>
             </div>
           </li>

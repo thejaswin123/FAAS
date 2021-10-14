@@ -38,16 +38,6 @@
               </p>
             </a>
           </li>
-          <!-- <li class="nav-item btn-rotate dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="nc-icon nc-bell-55"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li> -->
 
           <li class="nav-item btn-rotate dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,7 +45,6 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="index.php?page=profile"><i class="nc-icon nc-circle-10"></i> Profile</a>
-              <!-- <a class="dropdown-item" href="index.php?page=password"><i class="nc-icon nc-key-25"></i> Password</a> -->
               <a class="dropdown-item" href="logout.php"><i class="nc-icon nc-button-power"></i> Logout</a>
             </div>
           </li>

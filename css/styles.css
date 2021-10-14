@@ -3,114 +3,55 @@ body {
     position: relative;
 }
 
-
-
 html {
-
     scroll-behavior: smooth;
-
 }
 
 .navbar-toggler {
-
     padding: .25rem .75rem;
-
     font-size: 1.25rem;
-
     line-height: 1.4;
-
     color: #fff;
-
     background-color: #417bff;
-
     border: 1px solid #417bff;
-
     border-radius: .25rem;
-
 }
-
-
-
-/*.nav-item {
-
-    transition: all ease-out;
-
-    transition-duration : 5s;
-
-    }*/
 
     .nav-item:hover .nav-link {
 
         font-weight: 600; 
-
     }
-
-
-
     .padding-1 {
-
         padding: 1rem !important;
-
     }
-
-
-
     .padding-2 {
-
         padding: 2rem !important;
-
     }
-
-
 
     .padding-3 {
-
         padding: 3rem !important;
-
     }
-
-
 
     .padding-4 {
-
         padding: 5rem 0!important;
-
     }
-
-
 
     .padding-5 {
-
         padding: 5rem !important;
-
     }
 
-
-
-    .top-nav{
-
-
-
-    }
-
+    
 
 .logo-img {
     width: 100px;
     object-fit: cover;
 }
-    .logo-img .image {
-
-       width: 100%;
-
-
-   }
-
-
+.logo-img .image {
+    width: 100%;
+}
 
    .user-image-navi.image {
-
     width: 40px;
-
     border-radius: 20px;
 
 }
@@ -445,16 +386,6 @@ li .nav-link {
 
 }
 
-
-
-/*#coaches .single-profile{
-
-    background: #f9f9f9;
-
-}*/
-
-
-
 #orders {
 
     background: #f9f9f9;
@@ -493,17 +424,11 @@ html {
 
 }
 
-/*body {
-
-    font-family: 'Poppins', sans-serif;
-
-    }*/
 
 
 
 
 
-    /*********************** Default Button ****************************/
 
     .btn-light:not(:disabled):not(.disabled).active:focus, .btn-light:not(:disabled):not(.disabled):active:focus {
 
@@ -872,11 +797,6 @@ html {
 
 }
 
-/*.received_withd_msg p:first-child {
-
-    padding: 15px 25px 5px 20px;
-
-}*/
 
 .received_withd_msg .text-right {
 
@@ -924,8 +844,6 @@ html {
     position: relative;
 
     padding: 15px 20px;
-
-    /*box-shadow: 0px 2px 8px #bdbdbd73;*/
 
     margin-bottom: 8px;
 
@@ -1252,17 +1170,8 @@ html {
 }
 
 
-
-/************************************** MESSAGE *********************************************/
-
-
-
-/* width */
-
 .message_section ::-webkit-scrollbar {
-
   width: 5px;
-
 }
 
 
@@ -1546,12 +1455,6 @@ span.sub-heading {
     cursor: pointer;
 }
 
-/*
-
-BG 01 #22263A
-BG 02 ##131523 
-background: #22263A;
-*/
 
 .bg-01 {
     background-color: #22263A !important;

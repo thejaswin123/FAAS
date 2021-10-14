@@ -1,23 +1,7 @@
 <?php
-$domain_name = "https://ranksboost.com/";
-$site_title = "FAWS";
+$domain_name = "";
+$site_title = "smaRTS";
 $admin_email_address = "example@any.com";
-//...........................................................................
-//.HHHH...HHHH..EEEEEEEEEEE.ELLL.......PPPPPPPPP...PEEEEEEEEEE.ERRRRRRRRR....
-//.HHHH...HHHH..EEEEEEEEEEE.ELLL.......PPPPPPPPPP..PEEEEEEEEEE.ERRRRRRRRRR...
-//.HHHH...HHHH..EEEEEEEEEEE.ELLL.......PPPPPPPPPPP.PEEEEEEEEEE.ERRRRRRRRRR...
-//.HHHH...HHHH..EEEE........ELLL.......PPPP...PPPP.PEEE........ERRR...RRRRR..
-//.HHHH...HHHH..EEEE........ELLL.......PPPP...PPPP.PEEE........ERRR...RRRRR..
-//.HHHHHHHHHHH..EEEEEEEEEE..ELLL.......PPPPPPPPPPP.PEEEEEEEEE..ERRRRRRRRRR...
-//.HHHHHHHHHHH..EEEEEEEEEE..ELLL.......PPPPPPPPPP..PEEEEEEEEE..ERRRRRRRRRR...
-//.HHHHHHHHHHH..EEEEEEEEEE..ELLL.......PPPPPPPPP...PEEEEEEEEE..ERRRRRRR......
-//.HHHH...HHHH..EEEE........ELLL.......PPPP........PEEE........ERRR.RRRR.....
-//.HHHH...HHHH..EEEE........ELLL.......PPPP........PEEE........ERRR..RRRR....
-//.HHHH...HHHH..EEEEEEEEEEE.ELLLLLLLLL.PPPP........PEEEEEEEEEE.ERRR..RRRRR...
-//.HHHH...HHHH..EEEEEEEEEEE.ELLLLLLLLL.PPPP........PEEEEEEEEEE.ERRR...RRRRR..
-//.HHHH...HHHH..EEEEEEEEEEE.ELLLLLLLLL.PPPP........PEEEEEEEEEE.ERRR....RRRR..
-//...........................................................................
-
 function last_id()
 {
   global $connection;
@@ -54,7 +38,7 @@ function redirect($location)
 function query($sql)
 {
   global $connection;
-  return mysqli_query($connection, $sql);// use to send query to database
+  return mysqli_query($connection, $sql);
 }
 
 function confirm($result)
@@ -62,19 +46,19 @@ function confirm($result)
   global $connection;
   if(!$result)
   {
-    die("QUERY FAILED". mysqli_error($connection));//mysqli_error — Returns a string description of the last error
+    die("QUERY FAILED". mysqli_error($connection));
   }
 }
 
 function escape_string($string)
 {
   global $connection;
-  return mysqli_real_escape_string($connection, $string);//Escapes special characters in a string for use in an SQL statement
+  return mysqli_real_escape_string($connection, $string);
 }
 
 function fetch_array($result)
 {
-  return mysqli_fetch_array($result); //use for fetch from database
+  return mysqli_fetch_array($result); 
 }
 
 function num_rows($result)
@@ -888,13 +872,6 @@ function generate_farmers_dropdown()
     echo "<option value='{$data['id']}'>{$data['farmer_id']}</option>";
   }
 }
-
-
-
-
-
-// 
-
 
 function validate_supplier_login()
 {

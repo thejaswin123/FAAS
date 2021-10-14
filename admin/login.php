@@ -55,7 +55,6 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		// admin_login_error();
 	</script>
 </body>
 </html>
