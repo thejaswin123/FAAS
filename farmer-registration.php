@@ -1,4 +1,7 @@
-<?php $title="Farmer Registration"; include 'include/header.php';farmer_register(); if(isset($_SESSION['farmer_id'])){redirect("farmer"); }  ?>
+<?php $title="Farmer Registration"; 
+include 'include/header.php';
+farmer_register(); if(isset($_SESSION['farmer_id'])){
+    redirect("farmer"); }  ?>
 
 <section id="registration" class="padding-4	 pt-5 bg-02" style="min-height: 90vh;">
 <div class="container">

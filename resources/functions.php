@@ -10,8 +10,7 @@ function last_id()
 
 function set_message($msg)
 {
-  if(!empty($msg))
-  {
+  if (!empty($msg)) {
     $_SESSION['message'] = $msg;
   } else {
     $msg = "";
@@ -20,12 +19,9 @@ function set_message($msg)
 
 function set_error_message($msg)
 {
-  if(!empty($msg))
-  {
+  if (!empty($msg)) {
     $_SESSION['error_message'] = $msg;
-  }
-  else
-  {
+  } else {
     $msg = "";
   }
 }
@@ -44,9 +40,8 @@ function query($sql)
 function confirm($result)
 {
   global $connection;
-  if(!$result)
-  {
-    die("QUERY FAILED". mysqli_error($connection));
+  if (!$result) {
+    die("QUERY FAILED" . mysqli_error($connection));
   }
 }
 
@@ -58,7 +53,7 @@ function escape_string($string)
 
 function fetch_array($result)
 {
-  return mysqli_fetch_array($result); 
+  return mysqli_fetch_array($result);
 }
 
 function num_rows($result)
@@ -74,9 +69,9 @@ function run_query($sql)
 
 function get_page()
 {
-  if (isset($_GET['page'])) { 
+  if (isset($_GET['page'])) {
     $page = $_GET['page'];
-    $filename = "pages/".$page.".php";
+    $filename = "pages/" . $page . ".php";
     if (file_exists($filename)) {
       include $filename;
     }
@@ -85,7 +80,7 @@ function get_page()
   }
 }
 
-function get_user_data($id,$user)
+function get_user_data($id, $user)
 {
   $query = query("SELECT * FROM {$user}s WHERE {$user}_id = $id");
   confirm($query);
@@ -93,7 +88,7 @@ function get_user_data($id,$user)
   return $data;
 }
 
-function get_user_field_id($id,$user,$field)
+function get_user_field_id($id, $user, $field)
 {
   $query = query("SELECT {$field} FROM {$user}s WHERE {$user}_id = $id");
   confirm($query);
@@ -101,7 +96,7 @@ function get_user_field_id($id,$user,$field)
   return $data[$field];
 }
 
-function count_as_total($table,$where)
+function count_as_total($table, $where)
 {
   $query = query("SELECT * FROM {$table} {$where}");
   confirm($query);
@@ -109,7 +104,7 @@ function count_as_total($table,$where)
   return $count;
 }
 
-function sum_as_total($table,$where,$field)
+function sum_as_total($table, $where, $field)
 {
   $query = query("SELECT SUM($field) AS Total FROM {$table} {$where}");
   confirm($query);
@@ -117,7 +112,14 @@ function sum_as_total($table,$where,$field)
   return $data['Total'];
 }
 
-function sum_as_total_farmer($table,$where,$field)
+function get_count($table){
+  $query = query("SELECT COUNT(*) AS Total FROM {$table}");
+  confirm($query);
+  $data = fetch_array($query);
+  return $data['Total'];
+}
+
+function sum_as_total_farmer($table, $where, $field)
 {
   $query = query("SELECT SUM($field) AS Total FROM {$table} {$where}");
   confirm($query);
@@ -127,20 +129,19 @@ function sum_as_total_farmer($table,$where,$field)
 
 function show_sweet_alert($alert)
 {
-  echo "<script>$(document).ready(function(){".$alert."();});</script>";
+  echo "<script>$(document).ready(function(){" . $alert . "();});</script>";
 }
 
-function show_sweet_alert_parm($alert,$parm)
+function show_sweet_alert_parm($alert, $parm)
 {
-  echo "<script>$(document).ready(function(){".$alert."('".$parm."');});</script>";
+  echo "<script>$(document).ready(function(){" . $alert . "('" . $parm . "');});</script>";
 }
 
 function get_active_class($page)
 {
   $current = "";
-  
-  if (isset($_GET['page'])) 
-  {
+
+  if (isset($_GET['page'])) {
     $current = $_GET['page'];
   }
 
@@ -153,14 +154,14 @@ function get_active_class($page)
   }
 }
 
-function genrate_password_div($email,$type,$pattren=true)
+function genrate_password_div($email, $type, $pattren = true)
 {
   if ($pattren) {
-    $pattren='pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="8-15 charecters | 1 Upercase | 1 Number | 1 Special Charecter"';
+    $pattren = 'pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" title="8-15 charecters | 1 Upercase | 1 Number | 1 Special Charecter"';
   } else {
-    $pattren="";
+    $pattren = "";
   }
-$confirm = <<<DELIMETER
+  $confirm = <<<DELIMETER
 <div class="row">
   <div class="col-12">
     <div class="mb-3">
@@ -175,7 +176,7 @@ $confirm = <<<DELIMETER
 </div>
 DELIMETER;
 
-$change = <<<DELIMETER
+  $change = <<<DELIMETER
 <div class="row">
   <div class="col-12">
     <div class="mb-3">
@@ -202,7 +203,7 @@ DELIMETER;
 
   if (isset($_POST['change_password'])) {
     extract($_POST);
-    if (check_user_password($email,$current_password,$type)) {
+    if (check_user_password($email, $current_password, $type)) {
       echo $change;
     } else {
       show_sweet_alert("password_error()");
@@ -214,7 +215,7 @@ DELIMETER;
 
 function genrate_menu()
 {
-$default = <<<DELIMETER
+  $default = <<<DELIMETER
 <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown">
         <a class="nav-link" style='color:white !important' href="index.php">
@@ -241,9 +242,9 @@ $default = <<<DELIMETER
     </li>
 </ul>
 DELIMETER;
-if (isset($_SESSION['farmer_id'])) {
-}
-$farmer = <<<DELIMETER
+  if (isset($_SESSION['farmer_id'])) {
+  }
+  $farmer = <<<DELIMETER
 <ul class="navbar-nav ml-auto">
     <li class="nav-item active">
         <a class="nav-link" style='color:white !important' href="index.php">Home</a>
@@ -259,7 +260,7 @@ $farmer = <<<DELIMETER
     </li>
 </ul>
 DELIMETER;
-$supplier = <<<DELIMETER
+  $supplier = <<<DELIMETER
 <ul class="navbar-nav ml-auto">
     <li class="nav-item active">
         <a class="nav-link" style='color:white !important' href="index.php">Home</a>
@@ -284,11 +285,12 @@ DELIMETER;
   }
 }
 
-function get_table_fiels($table,$field,$sql){
-    $query = query("SELECT {$field} FROM {$table} {$sql}");
-    confirm($query);
-    $data=fetch_array($query);
-    return $data[$field];
+function get_table_fiels($table, $field, $sql)
+{
+  $query = query("SELECT {$field} FROM {$table} {$sql}");
+  confirm($query);
+  $data = fetch_array($query);
+  return $data[$field];
 }
 
 function update_field($sql)
@@ -297,7 +299,7 @@ function update_field($sql)
   confirm($query);
 }
 
-function get_table_record($table,$where="")
+function get_table_record($table, $where = "")
 {
   $query = query("SELECT * FROM {$table} {$where}");
   confirm($query);
@@ -324,12 +326,12 @@ function admin_login()
 {
   if (isset($_POST['admin_login'])) {
     extract($_POST);
-    $password = md5($password);
-    $query=query("SELECT * FROM admin WHERE username='{$username}' AND password='{$password}'");
+
+    $query = query("SELECT * FROM admin WHERE username='{$username}' AND password='{$password}'");
     confirm($query);
     $num = num_rows($query);
-    if ($num == 1 ) {
-      $data=fetch_array($query);
+    if ($num == 1) {
+      $data = fetch_array($query);
       $id = $data["admin_id"];
       extract($data);
       $_SESSION['admin_id'] = $id;
@@ -344,14 +346,14 @@ function admin_login()
 function get_farmers_admin()
 {
   $query = query("SELECT * FROM farmers");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($farmer=fetch_array($query)) {
-    $crops=sum_as_total("crops","WHERE farmer_id=".$farmer['id']."","quantity")."kg";
-    $btn = "";
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($farmer = fetch_array($query)) {
+      $crops = sum_as_total("crops", "WHERE farmer_id=" . $farmer['id'] . "", "quantity") . "kg";
+      $btn = "";
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$farmer['farmer_id']}</td>
@@ -364,25 +366,25 @@ $div = <<<DELIMETER
   </td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="6" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="6" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 function get_crops_admin()
 {
   $query = query("SELECT * FROM crops");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($crop=fetch_array($query)) {
-    $farmer_id = get_table_field_id($crop['farmer_id'],"farmer","farmer_id");
-    $amount = "$".$crop['amount']."/kg";
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($crop = fetch_array($query)) {
+      $farmer_id = get_table_field_id($crop['farmer_id'], "farmer", "farmer_id");
+      $amount = "Rs " . $crop['amount'] . "/kg";
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td><a href="index.php?page=farmer_profile&farmer={$crop['farmer_id']}">{$farmer_id}</a></td>
@@ -391,28 +393,28 @@ $div = <<<DELIMETER
   <td>{$amount}</td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="5" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="5" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 function get_crops_purchased_admin()
 {
   $query = query("SELECT * FROM crop_purchased");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($crop=fetch_array($query)) {
-    $farmer_id = get_table_field_id($crop['farmer_id'],"farmer","farmer_id");
-    $supplier_id = get_table_field_id($crop['supplier_id'],"supplier","supplier_id");
-    $crop_name = get_table_field_id($crop['crop_id'],"crops","name",false);
-    $total = "$".($crop['amount']*$crop['quantity']);
-    $amount = "$".$crop['amount']."/kg";
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($crop = fetch_array($query)) {
+      $farmer_id = get_table_field_id($crop['farmer_id'], "farmer", "farmer_id");
+      $supplier_id = get_table_field_id($crop['supplier_id'], "supplier", "supplier_id");
+      $crop_name = get_table_field_id($crop['crop_id'], "crops", "name", false);
+      $total = "Rs " . ($crop['amount'] * $crop['quantity']);
+      $amount = "Rs " . $crop['amount'] . "/kg";
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td><a href="index.php?page=farmer_profile&farmer={$crop['farmer_id']}">{$farmer_id}</a></td>
@@ -423,38 +425,38 @@ $div = <<<DELIMETER
   <td>{$total}</td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="5" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="5" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 function get_complaints_admin()
 {
   $query = query("SELECT * FROM complaints");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($complaint=fetch_array($query)) {
-    $farmer_id = get_table_field_id($complaint['farmer_id'],"farmer","farmer_id");
-    $supplier_id = get_table_field_id($complaint['supplier_id'],"supplier","supplier_id");
-    $complaint_id = $complaint['id'];
-    $accept = "";
-    $reject = "";
-    if ($complaint['status'] == 0) {
-      $accept = '<a href="index.php?page=complaints&approve='.$complaint_id.'" class="btn-sm btn-success">Approve</a>';
-      $reject = '<a href="index.php?page=complaints&reject='.$complaint_id.'" class="btn-sm btn-danger">Reject</a>';
-    }
+  if ($count > 0) {
+    while ($complaint = fetch_array($query)) {
+      $farmer_id = get_table_field_id($complaint['farmer_id'], "farmer", "farmer_id");
+      $supplier_id = get_table_field_id($complaint['supplier_id'], "supplier", "supplier_id");
+      $complaint_id = $complaint['id'];
+      $accept = "";
+      $reject = "";
+      if ($complaint['status'] == 0) {
+        $accept = '<a href="index.php?page=complaints&approve=' . $complaint_id . '" class="btn-sm btn-success">Approve</a>';
+        $reject = '<a href="index.php?page=complaints&reject=' . $complaint_id . '" class="btn-sm btn-danger">Reject</a>';
+      }
 
-    if ($complaint['status'] == 1) {
-      $accept = '<span class="text-success">Solved</span>';
-    } elseif ($complaint['status'] == 2) {
-      $accept = '<span class="text-danger">Rejected</span>';
-    }
-$div = <<<DELIMETER
+      if ($complaint['status'] == 1) {
+        $accept = '<span class="text-success">Solved</span>';
+      } elseif ($complaint['status'] == 2) {
+        $accept = '<span class="text-danger">Rejected</span>';
+      }
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$complaint['complainer']}</td>
@@ -467,24 +469,24 @@ $div = <<<DELIMETER
   </td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="5" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="5" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 
 function get_tips_admin()
 {
   $query = query("SELECT * FROM farmer_tips");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($tip=fetch_array($query)) {
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($tip = fetch_array($query)) {
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$tip['title']}</td>
@@ -493,42 +495,42 @@ $div = <<<DELIMETER
   </td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="3" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="3" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 function get_tips_farmer()
 {
   $query = query("SELECT * FROM farmer_tips");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($tip=fetch_array($query)) {
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($tip = fetch_array($query)) {
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$tip['title']}</td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="2" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="2" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 
 
-function get_table_field_id($id,$table,$field,$type=true)
+function get_table_field_id($id, $table, $field, $type = true)
 {
   if ($type) {
-    $table = $table."s";
+    $table = $table . "s";
   }
   $query = query("SELECT {$field} FROM {$table} WHERE id = $id");
   confirm($query);
@@ -538,31 +540,31 @@ function get_table_field_id($id,$table,$field,$type=true)
 
 function get_farmer_info($id)
 {
-    $query = query("SELECT * FROM farmers WHERE id={$id}");
-    confirm($query);
-    $data = fetch_array($query);
-    return $data;
+  $query = query("SELECT * FROM farmers WHERE id={$id}");
+  confirm($query);
+  $data = fetch_array($query);
+  return $data;
 }
 
 function get_supplier_info($id)
 {
-    $query = query("SELECT * FROM suppliers WHERE id={$id}");
-    confirm($query);
-    $data = fetch_array($query);
-    return $data;
+  $query = query("SELECT * FROM suppliers WHERE id={$id}");
+  confirm($query);
+  $data = fetch_array($query);
+  return $data;
 }
 
 function get_suppliers_admin()
 {
   $query = query("SELECT * FROM suppliers");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($supplier=fetch_array($query)) {
-    $crops=sum_as_total("crop_purchased","WHERE supplier_id=".$supplier['id']."","quantity")."kg";
-    $btn = "";
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($supplier = fetch_array($query)) {
+      $crops = sum_as_total("crop_purchased", "WHERE supplier_id=" . $supplier['id'] . "", "quantity") . "kg";
+      $btn = "";
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$supplier['supplier_id']}</td>
@@ -575,12 +577,12 @@ $div = <<<DELIMETER
   </td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="6" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="6" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 
@@ -624,7 +626,7 @@ function update_farmer()
     $id = $_SESSION['user_id'];
     $sql = "";
     foreach ($_POST as $name => $value) {
-      $sql .= $name."='".escape_string($value)."',";
+      $sql .= $name . "='" . escape_string($value) . "',";
     }
     $sql = substr($sql, 0, -1);
     echo "UPDATE `farmers` SET {$sql} WHERE id = {$id}";
@@ -633,33 +635,49 @@ function update_farmer()
   }
 }
 
+function update_supplier()
+{
+  if (isset($_POST['update_supplier'])) {
+    unset($_POST['update_supplier']);
+    $id = $_SESSION['user_id'];
+    $sql = "";
+    foreach ($_POST as $name => $value) {
+      $sql .= $name . "='" . escape_string($value) . "',";
+    }
+    $sql = substr($sql, 0, -1);
+    echo "UPDATE `suppliers` SET {$sql} WHERE id = {$id}";
+    $query = run_query("UPDATE `suppliers` SET {$sql} WHERE id = {$id}");
+    show_sweet_alert("information_updated");
+  }
+}
+
 function get_crops_purchased_farmer()
 {
   $id = $_SESSION['user_id'];
   $query = query("SELECT * FROM crop_purchased WHERE farmer_id = {$id}");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($crop=fetch_array($query)) {
-    $supplier_id = get_table_field_id($crop['supplier_id'],"supplier","supplier_id");
-    $crop_name = get_table_field_id($crop['crop_id'],"crops","name",false);
-    $total = "$".($crop['amount']*$crop['quantity']);
-    $amount = "$".$crop['amount']."/kg";
-    $accept = "";
-    $reject = "";
-    $crop_id = $crop['id'];
-    if ($crop['status'] == 1) {
-      $accept = "<span class='text-danger'>Accepted</span>";
-    } elseif ($crop['status'] == 0) {
-      $accept = "<a href='index.php?page=all_orders&accept={$crop_id}' class='btn-sm btn-success'>Accept</a>";
-      $reject = "<a href='index.php?page=all_orders&reject={$crop_id}' class='btn-sm btn-danger'>Reject</a>";
-    } elseif ($crop['status'] == 2) {
-      $accept = "<span class='text-danger'>Rejected</span>";
-    } elseif ($crop['status'] == 3) {
-      $accept = "<span class='text-success'>Received</span>";
-    }
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($crop = fetch_array($query)) {
+      $supplier_id = get_table_field_id($crop['supplier_id'], "supplier", "supplier_id");
+      $crop_name = get_table_field_id($crop['crop_id'], "crops", "name", false);
+      $total = "Rs " . ($crop['amount'] * $crop['quantity']);
+      $amount = "Rs " . $crop['amount'] . "/kg";
+      $accept = "";
+      $reject = "";
+      $crop_id = $crop['id'];
+      if ($crop['status'] == 1) {
+        $accept = "<span class='text-danger'>Accepted</span>";
+      } elseif ($crop['status'] == 0) {
+        $accept = "<a href='index.php?page=all_orders&accept={$crop_id}' class='btn-sm btn-success'>Accept</a>";
+        $reject = "<a href='index.php?page=all_orders&reject={$crop_id}' class='btn-sm btn-danger'>Reject</a>";
+      } elseif ($crop['status'] == 2) {
+        $accept = "<span class='text-danger'>Rejected</span>";
+      } elseif ($crop['status'] == 3) {
+        $accept = "<span class='text-success'>Received</span>";
+      }
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td><a href="index.php?page=supplier_profile&supplier={$crop['supplier_id']}">{$supplier_id}</a></td>
@@ -673,42 +691,43 @@ $div = <<<DELIMETER
   </td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 function get_crops_farmer()
 {
   $id = $_SESSION['user_id'];
   $query = query("SELECT * FROM crops WHERE farmer_id = {$id}");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($crop=fetch_array($query)) {
-    $total = "$".($crop['amount']*$crop['quantity']);
-    $amount = "$".$crop['amount']."/kg";
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($crop = fetch_array($query)) {
+      $total = "Rs " . ($crop['amount'] * $crop['quantity']);
+      $amount = "Rs " . $crop['amount'] . "/kg";
+      $div = <<<DELIMETER
 <tr>
-  <td>{$sr}</td>
-  <td>{$crop['name']}</td>
-  <td>{$crop['quantity']}kg</td>
-  <td>{$amount}</td>
+<td>{$sr}</td>
+<td>{$crop['name']}</td>
+<td>{$crop['quantity']}kg</td>
+<td>{$amount}</td>
   <td>
     <a href="index.php?page=crops&delete={$crop['id']}" class="btn-sm btn-danger">Delete</a>
   </td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
+  
 }
 
 
@@ -770,7 +789,7 @@ function received_order()
     confirm($query);
     $data = fetch_array($query);
     $old_quantity = $data['quantity'];
-    $new_quantity = intval($old_quantity)-intval($purchased_quantity);
+    $new_quantity = intval($old_quantity) - intval($purchased_quantity);
     $query = query("UPDATE crops SET quantity={$new_quantity} WHERE id={$id}");
     confirm($query);
     redirect("index.php?page=all_orders");
@@ -791,21 +810,21 @@ function get_complaints_farmer()
 {
   $id = $_SESSION['user_id'];
   $query = query("SELECT * FROM complaints WHERE farmer_id = {$id} AND complainer = 'farmer'");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($complaint=fetch_array($query)) {
-    $status ="";
-    if ($complaint['status'] == 1) {
-      $status ="<span class='text-success'>Solved</span>";
-    } else if ($complaint['status'] == 2) {
-      $status ="<span class='text-danger'>Rejected</span>";
-    } else if ($complaint['status'] == 0) {
-      $status ="<span class='text-primary'>Proccessing</span>";
-    }
-    $supplier_id = get_table_field_id($complaint['supplier_id'],"supplier","supplier_id");
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($complaint = fetch_array($query)) {
+      $status = "";
+      if ($complaint['status'] == 1) {
+        $status = "<span class='text-success'>Solved</span>";
+      } else if ($complaint['status'] == 2) {
+        $status = "<span class='text-danger'>Rejected</span>";
+      } else if ($complaint['status'] == 0) {
+        $status = "<span class='text-primary'>Proccessing</span>";
+      }
+      $supplier_id = get_table_field_id($complaint['supplier_id'], "supplier", "supplier_id");
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$supplier_id}</td>
@@ -813,33 +832,33 @@ $div = <<<DELIMETER
   <td>{$status}</td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 function get_complaints_supplier()
 {
   $id = $_SESSION['user_id'];
   $query = query("SELECT * FROM complaints WHERE supplier_id = {$id} AND complainer = 'supplier'");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($complaint=fetch_array($query)) {
-    $status ="";
-    if ($complaint['status'] == 1) {
-      $status ="<span class='text-success'>Solved</span>";
-    } else if ($complaint['status'] == 2) {
-      $status ="<span class='text-danger'>Rejected</span>";
-    } else if ($complaint['status'] == 0) {
-      $status ="<span class='text-primary'>Proccessing</span>";
-    }
-    $supplier_id = get_table_field_id($complaint['supplier_id'],"supplier","supplier_id");
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($complaint = fetch_array($query)) {
+      $status = "";
+      if ($complaint['status'] == 1) {
+        $status = "<span class='text-success'>Solved</span>";
+      } else if ($complaint['status'] == 2) {
+        $status = "<span class='text-danger'>Rejected</span>";
+      } else if ($complaint['status'] == 0) {
+        $status = "<span class='text-primary'>Proccessing</span>";
+      }
+      $supplier_id = get_table_field_id($complaint['supplier_id'], "supplier", "supplier_id");
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td><a href="index.php?page=supplier_profile&supplier={$complaint['supplier_id']}">{$supplier_id}</a></td>
@@ -847,19 +866,19 @@ $div = <<<DELIMETER
   <td>{$status}</td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 function generate_suppliers_dropdown()
 {
   $query = query("SELECT * FROM suppliers");
   confirm($query);
-  while ($data=fetch_array($query)) {
+  while ($data = fetch_array($query)) {
     echo "<option value='{$data['id']}'>{$data['supplier_id']}</option>";
   }
 }
@@ -868,7 +887,7 @@ function generate_farmers_dropdown()
 {
   $query = query("SELECT * FROM farmers");
   confirm($query);
-  while ($data=fetch_array($query)) {
+  while ($data = fetch_array($query)) {
     echo "<option value='{$data['id']}'>{$data['farmer_id']}</option>";
   }
 }
@@ -906,14 +925,14 @@ function get_crops_supplier()
 {
   $id = $_SESSION['user_id'];
   $query = query("SELECT * FROM crops");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($crop=fetch_array($query)) {
-    $farmer_id = get_table_field_id($crop['farmer_id'],"farmer","farmer_id");
-    $amount = "$".$crop['amount']."/kg";
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($crop = fetch_array($query)) {
+      $farmer_id = get_table_field_id($crop['farmer_id'], "farmer", "farmer_id");
+      $amount = "Rs " . $crop['amount'] . "/kg";
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$farmer_id}</td>
@@ -925,13 +944,14 @@ $div = <<<DELIMETER
   </td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
 }
-}
+
 
 function order_crops()
 {
@@ -953,28 +973,28 @@ function get_crops_purchased_supplier()
 {
   $id = $_SESSION['user_id'];
   $query = query("SELECT * FROM crop_purchased WHERE supplier_id = {$id}");
-    confirm($query);
-  $sr=1;
+  confirm($query);
+  $sr = 1;
   $count = num_rows($query);
-if ($count > 0) {
-  while ($crop=fetch_array($query)) {
-    $farmer_id = get_table_field_id($crop['farmer_id'],"farmer","farmer_id");
-    $crop_name = get_table_field_id($crop['crop_id'],"crops","name",false);
-    $total = "$".($crop['amount']*$crop['quantity']);
-    $amount = "$".$crop['amount']."/kg";
-    $accept = "";
-    $reject = "";
-    $crop_id = $crop['id'];
-    if ($crop['status'] == 1) {
-      $accept = "<a href='index.php?page=all_orders&received={$crop_id}' class='btn-sm btn-success'>Recived</a>";
-    } elseif ($crop['status'] == 0) {
-      $accept = "<span class='text-info'>Proccessing</span>";
-    } elseif ($crop['status'] == 2) {
-      $accept = "<span class='text-danger'>Rejected</span>";
-    } elseif ($crop['status'] == 3) {
-      $accept = "<span class='text-success'>Received</span>";
-    }
-$div = <<<DELIMETER
+  if ($count > 0) {
+    while ($crop = fetch_array($query)) {
+      $farmer_id = get_table_field_id($crop['farmer_id'], "farmer", "farmer_id");
+      $crop_name = get_table_field_id($crop['crop_id'], "crops", "name", false);
+      $total = "Rs " . ($crop['amount'] * $crop['quantity']);
+      $amount = "Rs " . $crop['amount'] . "/kg";
+      $accept = "";
+      $reject = "";
+      $crop_id = $crop['id'];
+      if ($crop['status'] == 1) {
+        $accept = "<a href='index.php?page=all_orders&received={$crop_id}' class='btn-sm btn-success'>Recieved</a>";
+      } elseif ($crop['status'] == 0) {
+        $accept = "<span class='text-info'>Proccessing</span>";
+      } elseif ($crop['status'] == 2) {
+        $accept = "<span class='text-danger'>Rejected</span>";
+      } elseif ($crop['status'] == 3) {
+        $accept = "<span class='text-success'>Received</span>";
+      }
+      $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$farmer_id}</td>
@@ -988,12 +1008,12 @@ $div = <<<DELIMETER
   </td>
 </tr>
 DELIMETER;
-$sr++;
-echo $div;
+      $sr++;
+      echo $div;
+    }
+  } else {
+    echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
   }
-} else {
-  echo '<tr><td colspan="7" class="text-center text-danger"><h5>No data found</h5></td></tr>';
-}
 }
 
 function add_complaint_supplier()
@@ -1002,6 +1022,17 @@ function add_complaint_supplier()
     extract($_POST);
     $id = $_SESSION['user_id'];
     $query = query("INSERT INTO complaints(complainer,supplier_id,farmer_id,complaint) VALUES ('supplier',{$id},{$farmer},'{$complaint}')");
+    confirm($query);
+    redirect("index.php?page=complaint");
+  }
+}
+
+function add_complaint_farmer()
+{
+  if (isset($_POST['add_complaint'])) {
+    extract($_POST);
+    $id = $_SESSION['user_id'];
+    $query = query("INSERT INTO complaints(complainer,supplier_id,farmer_id,complaint) VALUES ('farmer',{$supplier},{$id},'{$complaint}')");
     confirm($query);
     redirect("index.php?page=complaint");
   }
@@ -1022,7 +1053,7 @@ function reject_complaint()
   if (isset($_GET['reject'])) {
     $id = $_GET['reject'];
     echo "UPDATE complaints SET status=2 WHERE id={$id}";
-    $query = query("UPDATE complaints SET status=2 WHERE id=".$id."");
+    $query = query("UPDATE complaints SET status=2 WHERE id=" . $id . "");
     confirm($query);
     redirect("index.php?page=complaints");
   }
@@ -1033,8 +1064,8 @@ function last_record_id($table)
   $query = query("SELECT id,{$table}_id FROM {$table}s ORDER BY id DESC LIMIT 1;");
   confirm($query);
   $data = fetch_array($query);
-  $field = $table."_id";
-  $field = intval($data[$field])+1;
+  $field = $table . "_id";
+  $field = intval($data[$field]) + 1;
   if ($field == 1) {
     $field = 1001;
   }
@@ -1050,8 +1081,8 @@ function farmer_register()
     $fields = "";
     $values = "";
     foreach ($_POST as $name => $value) {
-      $fields .= $name.",";
-      $values .= "'".escape_string($value)."',";
+      $fields .= $name . ",";
+      $values .= "'" . escape_string($value) . "',";
     }
     $fields = substr($fields, 0, -1);
     $values = substr($values, 0, -1);
@@ -1072,8 +1103,8 @@ function supplier_register()
     $fields = "";
     $values = "";
     foreach ($_POST as $name => $value) {
-      $fields .= $name.",";
-      $values .= "'".escape_string($value)."',";
+      $fields .= $name . ",";
+      $values .= "'" . escape_string($value) . "',";
     }
     $fields = substr($fields, 0, -1);
     $values = substr($values, 0, -1);
@@ -1091,7 +1122,7 @@ function get_farmers()
   $sr = 1;
   while ($data = fetch_array($query)) {
     extract($data);
-$div = <<<DELIMETER
+    $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$farmer_id}</td>
@@ -1099,8 +1130,8 @@ $div = <<<DELIMETER
   <td>{$phone}</td>
 </tr>
 DELIMETER;
-echo $div;
-$sr++;
+    echo $div;
+    $sr++;
   }
 }
 
@@ -1111,7 +1142,7 @@ function get_suppliers()
   $sr = 1;
   while ($data = fetch_array($query)) {
     extract($data);
-$div = <<<DELIMETER
+    $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$supplier_id}</td>
@@ -1119,8 +1150,8 @@ $div = <<<DELIMETER
   <td>{$phone}</td>
 </tr>
 DELIMETER;
-echo $div;
-$sr++;
+    echo $div;
+    $sr++;
   }
 }
 
@@ -1128,7 +1159,7 @@ function add_request()
 {
   if (isset($_POST['add_request'])) {
     extract($_POST);
-    $query = query("INSERT INTO `requests`(`name`, `price`, `description`) VALUES ('".$name."','".$price."','".$description."')");
+    $query = query("INSERT INTO `requests`(`name`, `price`, `description`) VALUES ('" . $name . "','" . $price . "','" . $description . "')");
     confirm($query);
     redirect("index.php?page=requests");
   }
@@ -1141,8 +1172,8 @@ function get_requests_in_supplier()
   $sr = 1;
   while ($data = fetch_array($query)) {
     extract($data);
-    $price = "$".$price;
-$div = <<<DELIMETER
+    $price = "Rs " . $price;
+    $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$name}</td>
@@ -1151,8 +1182,8 @@ $div = <<<DELIMETER
   <td><a href="index.php?page=requests&delete={$data['id']}" class="btn-sm btn-danger">Delete</a></td>
 </tr>
 DELIMETER;
-echo $div;
-$sr++;
+    echo $div;
+    $sr++;
   }
 }
 
@@ -1164,8 +1195,8 @@ function get_requests_in_farmer()
   $sr = 1;
   while ($data = fetch_array($query)) {
     extract($data);
-    $price = "$".$price;
-$div = <<<DELIMETER
+    $price = "Rs " . $price;
+    $div = <<<DELIMETER
 <tr>
   <td>{$sr}</td>
   <td>{$name}</td>
@@ -1173,8 +1204,8 @@ $div = <<<DELIMETER
   <td>  {$price}</td>
 </tr>
 DELIMETER;
-echo $div;
-$sr++;
+    echo $div;
+    $sr++;
   }
 }
 

@@ -1,4 +1,4 @@
-<?php $user = get_supplier_info($_SESSION['user_id'],"supplier"); extract($user); update_supplier();?>
+<?php $user = get_farmer_info($_SESSION['user_id'],"farmer"); extract($user); update_farmer();?>
 <style type="text/css">
   .image-div img {
     width: 20%;
@@ -18,8 +18,8 @@
                 <div class="row">
                   <div class="col-6">
                     <div class="form-group">
-                      <label>SupplierID<span class="text-danger">*</span></label>
-                      <input type="text" class="form-control w-100" disabled value="<?php echo $supplier_id; ?>">
+                      <label>FarmerID<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control w-100" disabled value="<?php echo $farmer_id; ?>">
                     </div>
                   </div>
                   <div class="col-6">
@@ -43,7 +43,7 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <button class="btn btn-success w-100" name="update_supplier">Update</button>
+                    <button class="btn btn-success w-100" name="update_farmer">Update</button>
                   </div>
                 </div>
               </form>

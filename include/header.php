@@ -79,7 +79,7 @@
 
 									<div class="logo-img">
 
-										<img src="images/logo.png" alt="" class="image">
+										<img src="../images/log.png" alt="" class="image">
 
 									</div>
 

@@ -60,13 +60,6 @@ if (isset($_SESSION['farmer_id'])) {
         </a>
       </li>
 
-      <li class="<?php get_active_class('all_tips')?>">
-        <a href="index.php?page=all_tips">
-          <i class="nc-icon nc-paper text-primary"></i>
-          <p>Tips</p>
-        </a>
-      </li>
-
       <li class="<?php get_active_class('all_requests')?>">
         <a href="index.php?page=all_requests">
           <i class="nc-icon nc-paper text-primary"></i>

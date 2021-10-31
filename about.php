@@ -1,9 +1,5 @@
 <?php $title="About Us"; include 'include/header.php'; ?>
 
-
-
-
-
 <div class="page-wrraper">
 
 	<section id="main" class="section bg-light text-center">
