@@ -8,5 +8,5 @@ We have created a website to enable direct commuincation between farmers and sup
 
 In this way,the farmers can pitch their suppliers with their prices and the clients can purchase the desired products in those specified locations.
 
-In both ways, there would be satisfaction to farmers and suppliers.
+In both ways, there would be a satisfaction to farmers and suppliers.
 
